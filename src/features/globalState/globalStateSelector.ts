@@ -1,6 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
+import { RootState } from '../../store';
 
-const selectGlobalState = (state) => state.globalState;
+const selectGlobalState = (state: RootState) => state.globalState;
 
 export const selectUserName = createSelector(
     [selectGlobalState],

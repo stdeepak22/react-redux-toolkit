@@ -55,7 +55,7 @@ function App() {
                             <Login />
                         </Route>
                     }
-                    <Route default path="/">
+                    <Route path="/">
                         <HomePage />
                     </Route>
                 </Switch>

@@ -23,7 +23,16 @@ const loginSlice = createSlice({
     }
 });
 
-export const login = createAsyncThunk(
+interface LoginPayload {
+    username: string;
+    password: string;
+}
+
+interface LoginResult {
+    username: string;
+}
+
+export const login = createAsyncThunk<LoginResult, LoginPayload, { rejectValue: Error }>(
     'login/login',
     async ({ username, password }, thunkAPI) => {
         return new Promise((resolve, reject) => {

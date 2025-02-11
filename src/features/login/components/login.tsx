@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUsername, setPassword, clearLogin, login } from '../loginSlice';
 import { selectUsername, selectPassword } from '../loginSelector';
 import { useHistory } from 'react-router-dom';
 import { setLoginSuccessful } from '../../globalState/globalStateSlice';
+import { AppDispatch } from '../../../store';
 
 const Login = () => {
-    const dispatch = useDispatch();
+    const dispatch: AppDispatch = useDispatch();
     const username = useSelector(selectUsername);
     const password = useSelector(selectPassword);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
     const history = useHistory();
-    const handleLogin = async (e) => {
+    const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
         try {
             const resultAction = await dispatch(login({ username, password }));
-
+            resultAction.payload
             if (login.fulfilled.match(resultAction)) {
                 console.log('Login successful:', resultAction.payload);
                 dispatch(setLoginSuccessful(username));
                 history.push('/');
-            } else {
-                setError(resultAction.payload);
+            } else if (login.rejected.match(resultAction)) {
+                setError(resultAction.payload?.message ?? 'Login failed');
             }
         } catch (err) {
             console.error('An unexpected error occurred:', err);
