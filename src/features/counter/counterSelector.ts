@@ -1,6 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
+import { RootState } from '../../store';
 
-const selectCounterState = (state) => state.counter;
+const selectCounterState = (state: RootState) => state.counter;
 
 export const selectCounterValue = createSelector(
     [selectCounterState],

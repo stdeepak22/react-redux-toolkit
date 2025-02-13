@@ -5,8 +5,9 @@ import { selectUsername, selectPassword } from '../loginSelector';
 import { useHistory } from 'react-router-dom';
 import { setLoginSuccessful } from '../../globalState/globalStateSlice';
 import { AppDispatch } from '../../../store';
+import logger from '../../../utils/logger';
 
-const Login = () => {
+const Login = (): JSX.Element => {
     const dispatch: AppDispatch = useDispatch();
     const username = useSelector(selectUsername);
     const password = useSelector(selectPassword);
@@ -16,16 +17,16 @@ const Login = () => {
         e.preventDefault();
         try {
             const resultAction = await dispatch(login({ username, password }));
-            resultAction.payload
             if (login.fulfilled.match(resultAction)) {
-                console.log('Login successful:', resultAction.payload);
+                logger.log('Login successful:', resultAction.payload);
                 dispatch(setLoginSuccessful(username));
+                dispatch(clearLogin());
                 history.push('/');
             } else if (login.rejected.match(resultAction)) {
                 setError(resultAction.payload?.message ?? 'Login failed');
             }
         } catch (err) {
-            console.error('An unexpected error occurred:', err);
+            logger.error('An unexpected error occurred:', err);
             setError('An unexpected error occurred');
         }
     };

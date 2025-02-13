@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// import axios from 'axios';
 
 const loginSlice = createSlice({
     name: 'login',
@@ -34,7 +33,7 @@ interface LoginResult {
 
 export const login = createAsyncThunk<LoginResult, LoginPayload, { rejectValue: Error }>(
     'login/login',
-    async ({ username, password }, thunkAPI) => {
+    async ({ username, password }) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (username === 'admin' && password === 'password') {

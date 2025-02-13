@@ -1,8 +1,7 @@
-import React from 'react';
 import { selectIsLoggedIn } from '../globalState/globalStateSelector';
 import { useSelector } from 'react-redux';
 
-export const HomePage = () => {
+export const HomePage = (): JSX.Element => {
     const isLoggedIn = useSelector(selectIsLoggedIn);
     return (
         <div>

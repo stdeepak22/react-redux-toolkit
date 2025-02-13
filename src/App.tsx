@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Login } from './features/login/components/login';
 import { Counter } from './features/counter/components/counter';
@@ -9,7 +8,7 @@ import { performLogout } from './features/globalState/globalStateSlice';
 import { HomePage } from './features/home/home-page';
 import { SecretPage } from './features/home/secure-page';
 
-function LoginStatus() {
+function LoginStatus(): JSX.Element {
     const isLoggedIn = useSelector(selectIsLoggedIn);
     const userName = useSelector(selectUserName);
     const dispatch = useDispatch();
@@ -26,7 +25,7 @@ function LoginStatus() {
     );
 }
 
-function NavBar() {
+function NavBar(): JSX.Element {
     const isLoggedIn = useSelector(selectIsLoggedIn);
     return (
         <ul>
@@ -37,7 +36,7 @@ function NavBar() {
     );
 }
 
-function App() {
+function App(): JSX.Element {
     const isLoggedIn = useSelector(selectIsLoggedIn);
     return (
         <Provider store={store}>

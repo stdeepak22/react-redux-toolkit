@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, incrementAsync } from '../counterSlice';
 import { AppDispatch, RootState } from '../../../store';
 
-function Counter() {
+function Counter(): JSX.Element {
     const count = useSelector((st: RootState) => st.counter.value);
     const dispatch: AppDispatch = useDispatch();
 

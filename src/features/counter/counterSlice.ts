@@ -1,4 +1,4 @@
-import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const incrementAsync = createAsyncThunk('incrementAsync', async (amount: number) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
