@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 export const SecretPage = (): JSX.Element => {
     return (
         <div>

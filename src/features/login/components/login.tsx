@@ -1,8 +1,8 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, JSX, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUsername, setPassword, clearLogin, login } from '../loginSlice';
 import { selectUsername, selectPassword } from '../loginSelector';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { setLoginSuccessful } from '../../globalState/globalStateSlice';
 import { AppDispatch } from '../../../store';
 import logger from '../../../utils/logger';
@@ -12,7 +12,7 @@ const Login = (): JSX.Element => {
     const username = useSelector(selectUsername);
     const password = useSelector(selectPassword);
     const [error, setError] = useState<string | null>(null);
-    const history = useHistory();
+    const navigate = useNavigate();
     const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
         try {
@@ -21,7 +21,7 @@ const Login = (): JSX.Element => {
                 logger.log('Login successful:', resultAction.payload);
                 dispatch(setLoginSuccessful(username));
                 dispatch(clearLogin());
-                history.push('/');
+                navigate('/');
             } else if (login.rejected.match(resultAction)) {
                 setError(resultAction.payload?.message ?? 'Login failed');
             }

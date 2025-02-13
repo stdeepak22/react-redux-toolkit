@@ -1,15 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import store from './store';
-import App from './App';
-import { Provider } from 'react-redux';
+import App from './App'
 import { loadFromLocalStorage } from './features/globalState/globalStateSlice';
 
 store.dispatch(loadFromLocalStorage());
 
-ReactDOM.render(
-    <Provider store={store} >
-        <App />
-    </Provider>,
-    document.getElementById('root')
-);
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
